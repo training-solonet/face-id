@@ -22,7 +22,7 @@ const upload = multer({ storage: storage });
 app.use(express.static('public'));
 
 app.post('/upload', upload.single('image'), async (req, res) => {
-    // take the image from the uploads folder
+    // take the image from the uploads folder ...
     const image = path.join(__dirname, 'uploads', req.file.originalname);
 
     const form = new FormData();
