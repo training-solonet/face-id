@@ -29,8 +29,7 @@ function startVideo() {
     video.addEventListener('play', async () => {
         const canvas = faceapi.createCanvasFromMedia(video);
         document.body.append(canvas);
-        // full screen
-        const displaySize = { width: window.innerWidth, height: window.innerHeight };
+        const displaySize = { width: video.width, height: video.height };
         faceapi.matchDimensions(canvas, displaySize);
     
         const interval = setInterval(async () => {
