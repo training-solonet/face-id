@@ -6,7 +6,8 @@ import numpy as np
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@localhost/face_recognition_db'
+# Remove :password to connect my own sql
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/face_recognition_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -128,6 +129,22 @@ def list_users():
             user_list.append(user_info)
     
     return jsonify(user_list)
+
+# Endpoint to test face accuration
+@app.route('/face_accuracy', methods = ['GET'])
+def face_dataAccuration():
+    with app.app_context():
+        users = User.query.all()
+        accuracy_data = []
+        for user in users:
+            user_data = {
+                "name": user.name,
+                "encoding": len(user.encodings)
+            }
+            accuracy_data.append(user_data)
+            
+    return jsonify(accuracy_data)
+    
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
