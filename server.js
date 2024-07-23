@@ -36,6 +36,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
         },
       })
       .then((response) => {
+        // simpan data ke table logs
         console.log(response.data);
         // delete all the images in the uploads folder
         fs.readdir("uploads", (err, files) => {
