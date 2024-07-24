@@ -1,5 +1,4 @@
-import { where } from "sequelize";
-import Data from "../model/dataModel";
+import Data from "../model/dataModel.js";
 
 export const getData = async (req, res) => {
   try {

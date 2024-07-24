@@ -1,12 +1,5 @@
 import express from "express";
-import {
-  getData,
-  getDataById,
-  saveData,
-  updateData,
-  deleteData,
-} from "../controllers/DataController";
-
+import { getData, getDataById, saveData, updateData, deleteData } from "../controllers/DataController.js";
 const router = express.Router()
 
 router.get('/data', getData)

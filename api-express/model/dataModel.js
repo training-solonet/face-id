@@ -1,21 +1,22 @@
 import { Sequelize } from "sequelize";
-import db from "../config/Database";
+import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const Data = db.define('logs', {
+const Data = db.define('log', {
     name: DataTypes.STRING,
-    img: DataTypes.BLOB,
+    img: DataTypes.TEXT,
     timestamp: DataTypes.DATE,
     is_valid: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
+        type: DataTypes.ENUM,
+        values: ['0', '1'],
+        defaultValue: 'false'
     }
 }, {
     freezeTableName: true
 });
 
-export default  Data;
+export default Data;
 
 (async () => {
     await db.sync();
