@@ -10,7 +10,7 @@ const Data = db.define('logs', {
     is_valid: {
         type: DataTypes.ENUM,
         values: ['0', '1'],
-        defaultValue: 'false'
+        defaultValue: '1'
     }
 }, {
     freezeTableName: true

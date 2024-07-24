@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
-const db = new Sequelize ('db_face_recognition', 'tino', 'training2024', {
-    host: 'connectis.my.id',
+const db = new Sequelize ('face_recognition_db', 'root', '', {
+    host: 'localhost',
     dialect: 'mysql'
 })
 

@@ -131,20 +131,20 @@ def list_users():
     return jsonify(user_list)
 
 # Endpoint to test face accuration
-@app.route('/face_accuracy', methods = ['GET'])
-def face_dataAccuration():
-    with app.app_context():
-        users = User.query.all()
-        accuracy_data = []
-        for user in users:
-            user_data = {
-                "name": user.name,
-                "encoding": len(user.encodings)
-            }
-            accuracy_data.append(user_data)
+# @app.route('/face_accuracy', methods = ['GET'])
+# def face_dataAccuration():
+#     with app.app_context():
+#         users = User.query.all()
+#         accuracy_data = []
+#         for user in users:
+#             user_data = {
+#                 "name": user.name,
+#                 "encoding": len(user.encodings)
+#             }
+#             accuracy_data.append(user_data)
             
-    return jsonify(accuracy_data)
+#     return jsonify(accuracy_data)
     
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=True)
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0', port=5001, debug=True)
