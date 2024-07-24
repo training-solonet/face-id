@@ -3,7 +3,7 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const Data = db.define('log', {
+const Data = db.define('logs', {
     name: DataTypes.STRING,
     img: DataTypes.TEXT,
     timestamp: DataTypes.DATE,
