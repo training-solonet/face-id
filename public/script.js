@@ -11,7 +11,7 @@ Promise.all([
     faceapi.nets.faceRecognitionNet.loadFromUri('models/'),
     faceapi.nets.faceExpressionNet.loadFromUri('models/')
 ]).then(() => {
-    startButton.disabled = false;
+    // startButton.disabled = false;
 });
 
 // set loading message and start the video

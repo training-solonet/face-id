@@ -4,6 +4,36 @@ const axios = require("axios");
 const FormData = require("form-data");
 const fs = require("fs");
 const path = require("path");
+const Sequelize = require("sequelize")
+const DataTypes = require("sequelize");
+const { type } = require("os");
+
+// COnnect Database
+const db = new Sequelize('face_recognition_db', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql'
+})
+
+// Config Database
+const Data = db.define('logs', {
+    name: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    img: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    timestamp: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    },
+    is_valid: {
+        type: DataTypes.ENUM('0', '1'),
+        allowNull: false
+    }
+})
+
 
 const app = express();
 const port = 3050;
@@ -36,7 +66,17 @@ app.post("/upload", upload.single("image"), async (req, res) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        // check face found image
+        if(response.data.face_found_in_image){
+
+            Data.create({
+                name: JSON.stringify(response.data.face_names),
+                img: req.file.originalname,
+                timeStamp: new Date(),
+                is_valid: '0'
+            })
+        }
+
         // delete all the images in the uploads folder
         fs.readdir("uploads", (err, files) => {
           if (err) throw err;
