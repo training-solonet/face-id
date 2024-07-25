@@ -8,14 +8,17 @@ const Sequelize = require("sequelize")
 const DataTypes = require("sequelize");
 const { type } = require("os");
 
+// COnnect Database
 const db = new Sequelize('face_recognition_db', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 })
 
+// Config Database
 const Data = db.define('logs', {
     name: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     img: {
         type: DataTypes.TEXT,
@@ -63,17 +66,17 @@ app.post("/upload", upload.single("image"), async (req, res) => {
         },
       })
       .then((response) => {
-          // simpan data ke table logs
-        const { name, is_valid} = response.data
-        console.log(response.data);
+        // check face found image
+        if(response.data.face_found_in_image){
 
-        Data.create({
-            name: name,
-            img: req.file.originalname,
-            timeStamp: new Date(),
-            is_valid: is_valid ? '1' : '0'
-        })
-        
+            Data.create({
+                name: JSON.stringify(response.data.face_names),
+                img: req.file.originalname,
+                timeStamp: new Date(),
+                is_valid: '0'
+            })
+        }
+
         // delete all the images in the uploads folder
         fs.readdir("uploads", (err, files) => {
           if (err) throw err;
