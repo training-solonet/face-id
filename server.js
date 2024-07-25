@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const multer = require("multer");
 const axios = require("axios");
@@ -6,11 +7,10 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize")
 const DataTypes = require("sequelize");
-const { type } = require("os");
 
-// COnnect Database
-const db = new Sequelize('face_recognition_db', 'root', '', {
-    host: 'localhost',
+// Connect Database
+const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
     dialect: 'mysql'
 })
 
@@ -59,8 +59,8 @@ app.post("/upload", upload.single("image"), async (req, res) => {
   form.append("file", fs.createReadStream(image));
 
   try {
-    const response = await axios
-      .post("https://faceid.connectis.my.id/find_face", form, {
+    await axios
+      .post(process.ENDPOINT_FACE_RECOGNITION + "/face_recognition", form, {
         headers: {
           ...form.getHeaders(),
         },
