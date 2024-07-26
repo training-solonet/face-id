@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-uploads
 Backend/node_modules/*
 Backend/node_modules/*
 dist
