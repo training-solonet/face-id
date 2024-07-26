@@ -23,7 +23,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/edy/face_recognition_env/frontend
+          cd /home/edy/face_recognition_env/face-id
           git pull origin main
           npm i
           pm2 restart frontend_faceid
