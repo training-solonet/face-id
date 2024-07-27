@@ -8,7 +8,7 @@ const Sequelize = require("sequelize")
 const DataTypes = require("sequelize");
 const { type } = require("os");
 
-// COnnect Database
+// Connect Database
 const db = new Sequelize('face_recognition_db', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
